@@ -1,8 +1,8 @@
-import FirstR3FApplication from "./55FirstR3FApplication";
+import Drei from "./56Drei";
 import "./App.css";
 
 function App() {
-  return <FirstR3FApplication />;
+  return <Drei />;
 }
 
 export default App;
