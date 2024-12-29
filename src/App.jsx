@@ -1,8 +1,8 @@
-import Drei from "./56Drei";
+import Debug from "./57Debug";
 import "./App.css";
 
 function App() {
-  return <Drei />;
+  return <Debug />;
 }
 
 export default App;
