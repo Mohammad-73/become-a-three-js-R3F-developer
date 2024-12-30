@@ -4,6 +4,7 @@ import {
   BakeShadows,
   ContactShadows,
   Environment,
+  Lightformer,
   OrbitControls,
   RandomizedLight,
   Sky,
@@ -61,7 +62,22 @@ export default function Experience() {
         //   "../../public/environmentMaps/2/nz.jpg",
         // ]}
         files={"../../public/environmentMaps/the_sky_is_on_fire_2k.hdr"}
-      />
+        // preset="sunset"
+        // resolution={32}
+      >
+        {/* <color args={["#000000"]} attach="background" />
+        <Lightformer
+          position-z={-5}
+          scale={10}
+          color="red"
+          intensity={10}
+          form="ring"
+        /> */}
+        {/* <mesh position-z={-5} scale={10}>
+          <planeGeometry />
+          <meshBasicMaterial color={[100, 0, 0]} />
+        </mesh> */}
+      </Environment>
 
       {/* <BakeShadows /> */}
 
