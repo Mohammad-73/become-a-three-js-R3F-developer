@@ -2,6 +2,7 @@ import { useFrame } from "@react-three/fiber";
 import {
   AccumulativeShadows,
   BakeShadows,
+  ContactShadows,
   OrbitControls,
   RandomizedLight,
   softShadows,
@@ -10,6 +11,7 @@ import {
 import { useRef } from "react";
 import { Perf } from "r3f-perf";
 import * as THREE from "three";
+import { useControls } from "leva";
 
 // softShadows({
 //   frustum: 3.75,
@@ -22,12 +24,18 @@ import * as THREE from "three";
 export default function Experience() {
   const cube = useRef();
   const directionalLightRef = useRef();
-  //   useHelper(directionalLightRef, THREE.DirectionalLightHelper, 2);
+  useHelper(directionalLightRef, THREE.DirectionalLightHelper, 2);
 
   useFrame((state, delta) => {
     // const time = state.clock.elapsedTime;
     // cube.current.position.x = 2 + Math.sin(time);
     cube.current.rotation.y += delta * 0.2;
+  });
+
+  const { color, opacity, blur } = useControls("contact shadows", {
+    color: "#000000",
+    opacity: { value: 0.5, min: 0, max: 5 },
+    blur: { value: 1, min: 0, max: 10 },
   });
 
   return (
@@ -40,7 +48,7 @@ export default function Experience() {
 
       <OrbitControls makeDefault />
 
-      <AccumulativeShadows
+      {/* <AccumulativeShadows
         position={[0 - 0.99, 0]}
         scale={10}
         color="#316d39"
@@ -57,8 +65,17 @@ export default function Experience() {
           intensity={1}
           bias={0.001}
         />
-      </AccumulativeShadows>
+      </AccumulativeShadows> */}
 
+      <ContactShadows
+        position={[0, -0.99, 0]}
+        scale={10}
+        resolution={512}
+        far={5}
+        color={color}
+        opacity={opacity}
+        blur={blur}
+      />
       <directionalLight
         ref={directionalLightRef}
         castShadow
