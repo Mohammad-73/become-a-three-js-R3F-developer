@@ -82,7 +82,7 @@ export default function Experience() {
         blur={blur}
       />
 
-      <directionalLight
+      {/* <directionalLight
         ref={directionalLightRef}
         position={sunPosition}
         intensity={1.5}
@@ -94,10 +94,10 @@ export default function Experience() {
         shadow-camera-right={5}
         shadow-camera-left={-5}
         shadow-camera-bottom={-5}
-      />
-      <ambientLight intensity={0.5} />
+      /> */}
+      {/* <ambientLight intensity={0.5} /> */}
 
-      <Sky sunPosition={sunPosition} />
+      {/* <Sky sunPosition={sunPosition} /> */}
 
       <mesh castShadow position-x={-2}>
         <sphereGeometry />
