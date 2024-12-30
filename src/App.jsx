@@ -1,8 +1,8 @@
-import Debug from "./57Debug";
+import EnvironmentAndStaging from "./58EnvironmentAndStaging";
 import "./App.css";
 
 function App() {
-  return <Debug />;
+  return <EnvironmentAndStaging />;
 }
 
 export default App;
