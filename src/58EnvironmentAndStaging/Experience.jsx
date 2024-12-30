@@ -3,6 +3,7 @@ import {
   AccumulativeShadows,
   BakeShadows,
   ContactShadows,
+  Environment,
   OrbitControls,
   RandomizedLight,
   Sky,
@@ -43,9 +44,26 @@ export default function Experience() {
     sunPosition: { value: [1, 2, 3] },
   });
 
+  const { envMapIntensity } = useControls("environment map", {
+    envMapIntensity: { value: 3.5, min: 0, max: 12 },
+  });
+
   return (
     <>
-      <BakeShadows />
+      <Environment
+        background
+        // files={[
+        //   "../../public/environmentMaps/2/px.jpg",
+        //   "../../public/environmentMaps/2/nx.jpg",
+        //   "../../public/environmentMaps/2/py.jpg",
+        //   "../../public/environmentMaps/2/ny.jpg",
+        //   "../../public/environmentMaps/2/pz.jpg",
+        //   "../../public/environmentMaps/2/nz.jpg",
+        // ]}
+        files={"../../public/environmentMaps/the_sky_is_on_fire_2k.hdr"}
+      />
+
+      {/* <BakeShadows /> */}
 
       <color args={["ivory"]} attach={"background"} />
 
@@ -101,12 +119,18 @@ export default function Experience() {
 
       <mesh castShadow position-x={-2}>
         <sphereGeometry />
-        <meshStandardMaterial color="orange" />
+        <meshStandardMaterial
+          color="orange"
+          envMapIntensity={envMapIntensity}
+        />
       </mesh>
 
       <mesh castShadow ref={cube} position-x={2} scale={1.5}>
         <boxGeometry />
-        <meshStandardMaterial color="mediumpurple" />
+        <meshStandardMaterial
+          color="mediumpurple"
+          envMapIntensity={envMapIntensity}
+        />
       </mesh>
 
       <mesh
@@ -116,7 +140,10 @@ export default function Experience() {
         scale={10}
       >
         <planeGeometry />
-        <meshStandardMaterial color="greenyellow" />
+        <meshStandardMaterial
+          color="greenyellow"
+          envMapIntensity={envMapIntensity}
+        />
       </mesh>
     </>
   );
