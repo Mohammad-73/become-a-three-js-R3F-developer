@@ -1,6 +1,5 @@
 import { Canvas } from "@react-three/fiber";
 import Experience from "./Experience.jsx";
-import "./style.css";
 
 const LoadModels = () => {
   return (
