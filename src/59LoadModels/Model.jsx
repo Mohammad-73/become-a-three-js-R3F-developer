@@ -2,7 +2,7 @@ import React from "react";
 import { useLoader } from "@react-three/fiber";
 import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/examples/jsm/loaders/DRACOLoader.js";
-import { useGLTF } from "@react-three/drei";
+import { Clone, useGLTF } from "@react-three/drei";
 
 const Model = () => {
   // const model = useLoader(GLTFLoader, "./hamburger.glb");
@@ -15,7 +15,15 @@ const Model = () => {
 
   const model = useGLTF("./hamburger-draco.glb");
 
-  return <primitive object={model.scene} scale={0.35} />;
+  return (
+    <>
+      <Clone object={model.scene} scale={0.35} position-x={-4} />;
+      <Clone object={model.scene} scale={0.35} position-x={0} />;
+      <Clone object={model.scene} scale={0.35} position-x={4} />;
+    </>
+  );
 };
+
+useGLTF.preload("./hamburger-draco.glb");
 
 export default Model;
