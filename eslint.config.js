@@ -33,7 +33,7 @@ export default [
         "warn",
         { allowConstantExport: true },
       ],
-      "react/no-unknown-property": [{ ignore: "mesh" }],
+      // "react/no-unknown-property": [{ ignore: "mesh" }],
     },
   },
 ];

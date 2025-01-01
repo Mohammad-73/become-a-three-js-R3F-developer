@@ -1,8 +1,8 @@
-import LoadModels from "./59LoadModels";
+import ThreeDText from "./60ThreeDText";
 import "./App.css";
 
 function App() {
-  return <LoadModels />;
+  return <ThreeDText />;
 }
 
 export default App;
