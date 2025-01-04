@@ -1,8 +1,8 @@
-import ThreeDText from "./60ThreeDText";
 import "./App.css";
+import PortalScene from "./assets/61PortalScene";
 
 function App() {
-  return <ThreeDText />;
+  return <PortalScene />;
 }
 
 export default App;
