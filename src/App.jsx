@@ -1,5 +1,5 @@
 import "./App.css";
-import PortalScene from "./assets/61PortalScene";
+import PortalScene from "./61PortalScene";
 
 function App() {
   return <PortalScene />;
