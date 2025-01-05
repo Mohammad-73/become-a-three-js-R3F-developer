@@ -33,10 +33,12 @@ export default function Experience() {
         onClick={eventHandler}
         // onDoubleClick={eventHandler}
         // onContextMenu={eventHandler}
-        // onPointerOver={eventHandler}
+        // onPointerOver={eventHandler} // Not good for performance
+        // onPointerEnter={eventHandler} // Not good for performance
         // onPointerDown={eventHandler}
-        // onPointerLeave={eventHandler}
-        // onPointerMove={eventHandler}
+        // onPointerLeave={eventHandler} // Not good for performance
+        // onPointerOut={eventHandler} // Not good for performance
+        // onPointerMove={eventHandler} // Not good for performance
         // onPointerMissed={eventHandler}
       >
         <boxGeometry />
