@@ -1,8 +1,8 @@
+import FunAndSimplePortfolio from "./64FunAndSimplePortfolio";
 import "./App.css";
-import PostProcessing from "./63PostProcessing";
 
 function App() {
-  return <PostProcessing />;
+  return <FunAndSimplePortfolio />;
 }
 
 export default App;
