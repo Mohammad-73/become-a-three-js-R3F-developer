@@ -1,8 +1,8 @@
-import FunAndSimplePortfolio from "./64FunAndSimplePortfolio";
+import Physics from "./65Physics";
 import "./App.css";
 
 function App() {
-  return <FunAndSimplePortfolio />;
+  return <Physics />;
 }
 
 export default App;
