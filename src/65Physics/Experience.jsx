@@ -3,12 +3,12 @@ import { useFrame } from "@react-three/fiber";
 import {
   CuboidCollider,
   CylinderCollider,
-  Debug,
+  InstancedRigidBodies,
   Physics,
   RigidBody,
 } from "@react-three/rapier";
 import { Perf } from "r3f-perf";
-import { useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import * as THREE from "three";
 
 export default function Experience() {
@@ -49,6 +49,40 @@ export default function Experience() {
     hitSound.play();
   };
 
+  const cubesCount = 50;
+  //   const cubesRef = useRef();
+
+  //   useEffect(() => {
+  //     for (let i = 0; i < cubesCount; i++) {
+  //       const matrix = new THREE.Matrix4();
+  //       matrix.compose(
+  //         new THREE.Vector3(i * 2, 0, 0),
+  //         new THREE.Quaternion(),
+  //         new THREE.Vector3(1, 1, 1)
+  //       );
+  //       cubesRef.current.setMatrixAt(i, matrix);
+  //     }
+  //   }, []);
+
+  const instances = useMemo(() => {
+    const instances = [];
+
+    for (let i = 0; i < cubesCount; i++) {
+      instances.push({
+        key: "instance_" + i,
+        position: [
+          (Math.random() - 0.5) * 8,
+          6 + i * 0.2,
+          (Math.random() - 0.5) * 8,
+        ],
+        rotation: [Math.random(), Math.random(), Math.random()],
+      });
+    }
+
+    return instances;
+  }, []);
+  console.log(instances);
+
   return (
     <>
       <Perf position="top-left" />
@@ -58,8 +92,8 @@ export default function Experience() {
       <directionalLight castShadow position={[1, 2, 3]} intensity={1.5} />
       <ambientLight intensity={0.5} />
 
-      <Physics>
-        <Debug />
+      <Physics gravity={[0, -9.08, 0]}>
+        {/* <Debug /> */}
 
         {/* Sphere */}
         <RigidBody colliders="ball">
@@ -74,11 +108,13 @@ export default function Experience() {
           ref={cubeRef}
           position={[1.5, 2, 0]}
           gravityScale={1}
-          restitution={0.5}
+          restitution={0}
           friction={0.7}
           colliders={false}
           onCollisionEnter={collisionEnter}
-          //   onCollisionExit={() => console.log("exit")}
+          // onCollisionExit={() => console.log("exit")}
+          // onSleep={() => console.log("sleep")}
+          // onWake={() => console.log("wake")}
         >
           <mesh onClick={cubeJump} castShadow>
             <boxGeometry />
@@ -88,7 +124,7 @@ export default function Experience() {
         </RigidBody>
 
         {/* Plane */}
-        <RigidBody type="fixed" friction={0.7}>
+        <RigidBody type="fixed" restitution={0} friction={0.7}>
           <mesh receiveShadow position-y={-1.25}>
             <boxGeometry args={[10, 0.5, 10]} />
             <meshStandardMaterial color="greenyellow" />
@@ -115,12 +151,24 @@ export default function Experience() {
         </RigidBody>
 
         {/* Walls */}
-        <RigidBody>
+        <RigidBody type="fixed">
           <CuboidCollider args={[5, 2, 0.5]} position={[0, 1, 5.25]} />
           <CuboidCollider args={[5, 2, 0.5]} position={[0, 1, -5.25]} />
           <CuboidCollider args={[0.5, 2, 5]} position={[5.25, 1, 0]} />
           <CuboidCollider args={[0.5, 2, 5]} position={[-5.25, 1, 0]} />
         </RigidBody>
+
+        <InstancedRigidBodies instances={instances}>
+          <instancedMesh
+            //   ref={cubesRef}
+            castShadow
+            receiveShadow
+            args={[null, null, cubesCount]}
+          >
+            <boxGeometry />
+            <meshStandardMaterial color="tomato" />
+          </instancedMesh>
+        </InstancedRigidBodies>
       </Physics>
     </>
   );
