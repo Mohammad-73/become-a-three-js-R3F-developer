@@ -1,13 +1,23 @@
-import { OrbitControls } from "@react-three/drei";
+import { OrbitControls, useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import { CuboidCollider, Debug, Physics, RigidBody } from "@react-three/rapier";
+import {
+  CuboidCollider,
+  CylinderCollider,
+  Debug,
+  Physics,
+  RigidBody,
+} from "@react-three/rapier";
 import { Perf } from "r3f-perf";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import * as THREE from "three";
 
 export default function Experience() {
   const twisterRef = useRef();
   const cubeRef = useRef();
+
+  const [hitSound] = useState(() => new Audio("./public/hit.mp3"));
+
+  const hamburger = useGLTF("./public/hamburger.glb");
 
   const cubeJump = () => {
     const mass = cubeRef.current.mass();
@@ -32,6 +42,12 @@ export default function Experience() {
     const z = Math.sin(angle) * 2;
     twisterRef.current.setNextKinematicTranslation({ x: x, y: -0.8, z: z });
   });
+
+  const collisionEnter = () => {
+    hitSound.currentTime = 0;
+    hitSound.volume = Math.random();
+    hitSound.play();
+  };
 
   return (
     <>
@@ -61,6 +77,8 @@ export default function Experience() {
           restitution={0.5}
           friction={0.7}
           colliders={false}
+          onCollisionEnter={collisionEnter}
+          //   onCollisionExit={() => console.log("exit")}
         >
           <mesh onClick={cubeJump} castShadow>
             <boxGeometry />
@@ -88,6 +106,12 @@ export default function Experience() {
             <boxGeometry />
             <meshStandardMaterial color="red" />
           </mesh>
+        </RigidBody>
+
+        {/* Hamburger */}
+        <RigidBody colliders={false} position={[0, 4, 0]}>
+          <primitive object={hamburger.scene} scale={0.25} />
+          <CylinderCollider args={[0.5, 1.25]} />
         </RigidBody>
       </Physics>
     </>
