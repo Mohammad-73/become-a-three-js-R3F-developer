@@ -81,7 +81,6 @@ export default function Experience() {
 
     return instances;
   }, []);
-  console.log(instances);
 
   return (
     <>

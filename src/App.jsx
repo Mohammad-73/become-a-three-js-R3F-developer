@@ -1,8 +1,8 @@
-import Physics from "./65Physics";
+import CreateAGame from "./66CreateAGame";
 import "./App.css";
 
 function App() {
-  return <Physics />;
+  return <CreateAGame />;
 }
 
 export default App;
