@@ -35,6 +35,7 @@ export default [
       ],
       // "react/no-unknown-property": ["error", { ignore: ["mesh"] }],
       "react/no-unknown-property": ["off", { ignore: ["JSX"] }],
+      "react/prop-types": "off",
     },
   },
 ];
