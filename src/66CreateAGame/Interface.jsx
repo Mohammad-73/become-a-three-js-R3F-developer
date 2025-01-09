@@ -1,5 +1,5 @@
 import { useKeyboardControls } from "@react-three/drei";
-import useGame from "./store/useGame";
+import useGame from "./stores/useGame";
 import { useEffect, useRef } from "react";
 import { addEffect } from "@react-three/fiber";
 

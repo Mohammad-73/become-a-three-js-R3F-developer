@@ -3,7 +3,7 @@ import { useFrame } from "@react-three/fiber";
 import { useRapier, RigidBody } from "@react-three/rapier";
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
-import useGame from "./store/useGame";
+import useGame from "./stores/useGame";
 
 const Player = () => {
   const bodyRef = useRef();
@@ -45,9 +45,7 @@ const Player = () => {
     const unsubscribeJump = subscribeKeys(
       (state) => state.jump,
       (value) => {
-        if (value) {
-          jump();
-        }
+        if (value) jump();
       }
     );
 
